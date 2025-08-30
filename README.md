@@ -80,5 +80,5 @@ Max:              9199 ns
 
 It is interesting that the latencies cluster around three main values (240ns, 1400ns, 4800ns). I expected a much more consistent value when using hardware timestamping. This is something I plan to investigate further. In the meantime, these results should be sufficient to produce accurate latency results for the Ethernet core.
 
-### testing total delay: host machine -> FPGA MAC (loopback) -> host machine
+### Testing total delay: host machine -> FPGA MAC (loopback) -> host machine
 TODO
