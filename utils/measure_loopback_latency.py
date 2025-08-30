@@ -87,35 +87,47 @@ def main():
     min = numpy.min(latencies)
     max = numpy.max(latencies)
 
+    stats = f"Average:          {avg:.0f} ns\n" \
+          + f"Standard Dev.:    {std:.0f} ns\n" \
+          + f"5th percentile:   {p5:.0f} ns\n" \
+          + f"50th percentile:  {p50:.0f} ns\n" \
+          + f"95th percentile:  {p95:.0f} ns\n" \
+          + f"99th percentile:  {p99:.0f} ns\n" \
+          + f"Min:              {min:.0f} ns\n" \
+          + f"Max:              {max:.0f} ns"
+
     print("====== Latency results ======")
-    print(f"Average:          {avg:.0f} ns")
-    print(f"Standard Dev.:    {std:.0f} ns")
-    print(f"5th percentile:   {p5:.0f} ns")
-    print(f"50th percentile:  {p50:.0f} ns")
-    print(f"95th percentile:  {p95:.0f} ns")
-    print(f"99th percentile:  {p99:.0f} ns")
-    print(f"Min:              {min:.0f} ns")
-    print(f"Max:              {max:.0f} ns")
+    print(stats)
 
 
     x = numpy.arange(len(latencies))
-    plt.figure()
+    fig = plt.figure(figsize=(8, 6))
     plt.scatter(x, latencies, color='b', s=1)
     plt.title("One Way Delay (loopback)")
     plt.xlabel("Sequence Number")
     plt.ylabel("Latency (ns)")
     plt.axis("tight")
+    plt.text(0.62, 0.85, stats, transform=fig.transFigure, fontfamily='monospace',
+        verticalalignment='top',
+        horizontalalignment='left',
+        bbox=dict(facecolor='white', alpha=0.8)
+    )
     plt.savefig("loopback_timeseries.png")
 
     sorted_latencies = numpy.sort(latencies)
     filtered_latencies = sorted_latencies[sorted_latencies < 6000]
-    plt.figure()
+    fig = plt.figure(figsize=(8, 6))
     plt.hist(filtered_latencies, bins=100, color='skyblue', edgecolor='black', alpha=0.6)
     plt.yscale('log')
     plt.title("One Way Delay (loopback)")
     plt.xlabel("Latency (ns)")
     plt.ylabel("Frequency (log)")
     plt.axis("tight")
+    plt.text(0.62, 0.85, stats, transform=fig.transFigure, fontfamily='monospace',
+        verticalalignment='top',
+        horizontalalignment='left',
+        bbox=dict(facecolor='white', alpha=0.8)
+    )
     plt.savefig("loopback_distribution.png")
 
 
@@ -150,6 +162,7 @@ def gen_ptp_packet():
 
 
 def enable_hardware_timestamp(interface):
+    # alternatively run hwstamp_ctl -i <interface> -t 1 -r 1
     config = HWTSTAMP_CONFIG()
     config.flags = 0
     config.tx_type = HWTSTAMP_TX_ON

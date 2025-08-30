@@ -63,17 +63,7 @@ To use this script, edit the `INTERFACE1` and `INTERFACE2` constants to match th
 ### Loopback delay results
 
 These are the results form my test setup:
-```
-====== Latency results ======
-Average:          299 ns
-Standard Dev.:    409 ns
-5th percentile:   236 ns
-50th percentile:  241 ns
-95th percentile:  246 ns
-99th percentile:  1356 ns
-Min:              18 ns
-Max:              9199 ns
-```
+
 ![lbplot](loopback_timeseries.png)
 
 ![histplot](loopback_distribution.png)
