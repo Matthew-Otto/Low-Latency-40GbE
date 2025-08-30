@@ -32,3 +32,81 @@ set_global_assignment -name DEVICE 1SG280LU2F50E2VG
 set_global_assignment -name BOARD "Stratix 10 GX FPGA Development Kit DK-DEV-1SGX-L-A"
 set_global_assignment -name EDA_TIME_SCALE "1 ps" -section_id eda_simulation
 set_global_assignment -name EDA_OUTPUT_DATA_FORMAT "VERILOG HDL" -section_id eda_simulation
+set_global_assignment -name SYSTEMVERILOG_FILE ../RTL/reset_sync.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../RTL/eth_40gb.sv
+set_global_assignment -name POWER_APPLY_THERMAL_MARGIN ADDITIONAL
+
+
+
+##########################################################################
+############################# Pin Locations ##############################
+##########################################################################
+
+#Clock, Reset, GPIO(LED, DIP, PB...)
+set_location_assignment PIN_BH33 -to clk_fpga_50m
+set_location_assignment PIN_A20 -to cpu_resetn
+
+#Transceiver Reference Clock
+set_location_assignment PIN_Y38 -to refclk_qsfp1_p
+#set_location_assignment PIN_Y37  -to refclk_qsfp1_n
+
+#QSFP
+set_location_assignment PIN_AE47 -to qsfp1_tx_p[0]
+#set_location_assignment PIN_AE46 -to qsfp1_tx_n[0]
+set_location_assignment PIN_AB49 -to qsfp1_tx_p[1]
+#set_location_assignment PIN_AB48 -to qsfp1_tx_n[1]
+set_location_assignment PIN_AA47 -to qsfp1_tx_p[2]
+#set_location_assignment PIN_AA46 -to qsfp1_tx_n[2]
+set_location_assignment PIN_AC47 -to qsfp1_tx_p[3]
+#set_location_assignment PIN_AC46 -to qsfp1_tx_n[3]
+set_location_assignment PIN_AC43 -to qsfp1_rx_p[0]
+#set_location_assignment PIN_AC42 -to qsfp1_rx_n[0]
+set_location_assignment PIN_W43 -to qsfp1_rx_p[1]
+#set_location_assignment PIN_W42  -to qsfp1_rx_n[1]
+set_location_assignment PIN_AB45 -to qsfp1_rx_p[2]
+#set_location_assignment PIN_AB44 -to qsfp1_rx_n[2]
+set_location_assignment PIN_AD45 -to qsfp1_rx_p[3]
+#set_location_assignment PIN_AD44 -to qsfp1_rx_n[3]
+set_location_assignment PIN_BF26 -to qsfp1_mod_seln
+set_location_assignment PIN_BE27 -to qsfp1_rstn
+set_location_assignment PIN_BD26 -to qsfp1_lp_mode
+set_location_assignment PIN_BE26 -to qsfp1_interruptn
+set_location_assignment PIN_BF27 -to qsfp1_mod_prsn
+set_location_assignment PIN_BH27 -to qsfp1_sda
+set_location_assignment PIN_BJ26 -to qsfp1_scl
+
+
+
+##########################################################################
+############### Pin IO Standards & Input Termination #####################
+##########################################################################
+
+#Clock, Reset, GPIO(LED, DIP, PB...)
+set_instance_assignment -name IO_STANDARD "1.8 V" -to clk_fpga_50m
+set_instance_assignment -name IO_STANDARD "1.8 V" -to cpu_resetn
+
+#Transceiver Reference Clock
+set_instance_assignment -name IO_STANDARD LVDS -to refclk_qsfp1_p -entity eth_40gb
+set_instance_assignment -name XCVR_REFCLK_PIN_TERMINATION AC_COUPLING -to refclk_qsfp1_p -entity eth_40gb
+
+#QSFP
+set_instance_assignment -name IO_STANDARD "HSSI DIFFERENTIAL I/O" -to qsfp1_tx_p[0] -entity eth_40gb
+set_instance_assignment -name IO_STANDARD "HSSI DIFFERENTIAL I/O" -to qsfp1_tx_p[1] -entity eth_40gb
+set_instance_assignment -name IO_STANDARD "HSSI DIFFERENTIAL I/O" -to qsfp1_tx_p[2] -entity eth_40gb
+set_instance_assignment -name IO_STANDARD "HSSI DIFFERENTIAL I/O" -to qsfp1_tx_p[3] -entity eth_40gb
+set_instance_assignment -name IO_STANDARD "HSSI DIFFERENTIAL I/O" -to qsfp1_rx_p[0] -entity eth_40gb
+set_instance_assignment -name IO_STANDARD "HSSI DIFFERENTIAL I/O" -to qsfp1_rx_p[1] -entity eth_40gb
+set_instance_assignment -name IO_STANDARD "HSSI DIFFERENTIAL I/O" -to qsfp1_rx_p[2] -entity eth_40gb
+set_instance_assignment -name IO_STANDARD "HSSI DIFFERENTIAL I/O" -to qsfp1_rx_p[3] -entity eth_40gb
+set_instance_assignment -name IO_STANDARD "1.8 V" -to qsfp1_mod_seln -entity eth_40gb
+set_instance_assignment -name IO_STANDARD "1.8 V" -to qsfp1_rstn -entity eth_40gb
+set_instance_assignment -name IO_STANDARD "1.8 V" -to qsfp1_lp_mode -entity eth_40gb
+set_instance_assignment -name IO_STANDARD "1.8 V" -to qsfp1_interruptn -entity eth_40gb
+set_instance_assignment -name IO_STANDARD "1.8 V" -to qsfp1_mod_prsn -entity eth_40gb
+set_instance_assignment -name IO_STANDARD "1.8 V" -to qsfp1_sda -entity eth_40gb
+set_instance_assignment -name IO_STANDARD "1.8 V" -to qsfp1_scl -entity eth_40gb
+set_global_assignment -name IP_FILE pma_40gbe_serdes.ip
+set_global_assignment -name IP_FILE qsfp_atx_pll.ip
+set_global_assignment -name IP_FILE phy_reset.ip
+set_global_assignment -name IP_FILE reset_release.ip
+set_global_assignment -name IP_FILE core_pll.ip
