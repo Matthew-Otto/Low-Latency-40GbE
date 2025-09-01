@@ -12,7 +12,7 @@ The gold standard for low latency networking is 10GbE (citation needed). 40GbE i
 
 ## Design
 
-PMA -> Deserializer -> gearbox -/32-> PCS/CORE FIFO -/32-> Gearbox/Block Alignment -/66-> Descrambler -/66-> Decoder -/66-> MAC
+PMA -> Deserializer -/32-> PCS/CORE FIFO -/32-> Gearbox/Block Alignment -/66-> Descrambler -/66-> Decoder -/66-> MAC
 
 
 
