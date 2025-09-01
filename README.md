@@ -1,26 +1,35 @@
 # Low latency 40GB Ethernet soft core.
 Designed for Stratix 10 series FPGAs
-with the goal of achieveing the absolute minimum latency possible.
+with the goal of achieving the absolute minimum latency possible.
 
-## Low latency:
+## Motivation
 
-Most PCS functions are implemented in hard logic H-tile IP block
-(user guide page 228)
+I often use Ethernet to move test data between my PC and FPGA due to its simplicity and portability. Many of the FPGA boards I have access to include QSFP cages, and 40GbE NICs can be had for very cheap. Since I was going to build this ethernet core anyway, I figured I would have fun with it and try to push the envelope. I can't increase the throughput, so instead I target latency.
 
-Clock recovery, (de)serialization, Block synchronization, (de)scrambling. 64b/66b encode/decode
+## 40GbE and latency
 
-H tile currently running at 322.265 MHz with a 66/32 ratio
-(Can running the block at 644.~ MHz with a ~66/16 ratio lower avg latency?)
+The gold standard for low latency networking is 10GbE (citation needed). 40GbE is composed of four bonded 10GbE channels. However, the latency will always be worse with 40GbE due to the need to synchronize and align the four channels at the receiver. If you are targeting the absolute lowest latency possible, 25GbE is the next logical step, but you'll have to contend with FEC.
+
+## Design
+
+PMA -> Deserializer -> gearbox -/32-> PCS/CORE FIFO -/32-> Gearbox/Block Alignment -/66-> Descrambler -/66-> Decoder -/66-> MAC
 
 
 
 ## Testing Latency
 
-Testing real world latency is non-trivial. I don't have access to dedicated hardware to test the latency of network links, so I used a 40GB NIC on a standard computer running Linux.
+## On-Chip Loopback
+TODO
+
+## Real World Latency
+
+Since this is a real core that I actually use, I figured it made sense to see what sort of latency I could achieve with real signals originating off-chip.
+Unfortunately, testing real world latency is non-trivial. I don't have access to professional networking characterization tools, so I did the best I could with a 40GB NIC on a standard computer running Linux.
 
 Datapath:
-Host PC -> NIC -> 1M DAC -> FPGA PMA -> FPGA MAC
-Host PC <- NIC <- 1M DAC <- FPGA PMA <- FPGA MAC (loopback)
+Host PC (tx) -> NIC -> 1M DAC -> FPGA PMA -> FPGA PCS/MAC (rx)
+                                             v
+Host PC (rx) <- NIC <- 1M DAC <- FPGA PMA <- FPGA MAC/PCS (tx)
 
 ### Testing one-way prop delay over 1 meter DAC cable
 
