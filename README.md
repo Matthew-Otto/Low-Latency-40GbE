@@ -1,3 +1,4 @@
+# (Under Construction)
 # Low latency 40GB Ethernet soft core.
 Designed for Stratix 10 series FPGAs
 with the goal of achieving the absolute minimum latency possible.
@@ -26,9 +27,9 @@ TODO
 Since this is a real core that I actually use, I figured it made sense to see what sort of latency I could achieve with real signals originating off-chip.
 Unfortunately, testing real world latency is non-trivial. I don't have access to professional networking characterization tools, so I did the best I could with a 40GB NIC on a standard computer running Linux.
 
-Datapath:
-Host PC (tx) -> NIC -> 1M DAC -> FPGA PMA -> FPGA PCS/MAC (rx)
-                                             v
+Datapath: \
+Host PC (tx) -> NIC -> 1M DAC -> FPGA PMA -> FPGA PCS/MAC (rx) \
+                                             v \
 Host PC (rx) <- NIC <- 1M DAC <- FPGA PMA <- FPGA MAC/PCS (tx)
 
 ### Testing one-way prop delay over 1 meter DAC cable
