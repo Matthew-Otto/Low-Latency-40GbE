@@ -2,11 +2,11 @@
 Designed for Stratix 10 series FPGAs
 with the goal of achieving the absolute minimum latency possible.
 
-## Motivation
+### Motivation
 
-I often use Ethernet to move test data between my PC and FPGA due to its simplicity and portability. Many of the FPGA boards I have access to include QSFP cages, and 40GbE NICs can be had for very cheap. Since I was going to build this ethernet core anyway, I figured I would have fun with it and try to push the envelope. I can't increase the throughput, so instead I target latency.
+I often use Ethernet to move test data between my PC and FPGA due to its simplicity and portability. Many of the FPGA boards I have access to include QSFP cages, and 40GbE NICs can be had for very cheap. Since I was going to build this Ethernet core anyway, I figured I would have fun with it and try to push the envelope. I can't increase the throughput, so instead I target latency.
 
-## 40GbE and latency
+### 40GbE and latency
 
 The gold standard for low latency networking is 10GbE (citation needed). 40GbE is composed of four bonded 10GbE channels. However, the latency will always be worse with 40GbE due to the need to synchronize and align the four channels at the receiver. If you are targeting the absolute lowest latency possible, 25GbE is the next logical step, but you'll have to contend with FEC.
 
@@ -18,10 +18,10 @@ PMA -> Deserializer -/32-> PCS/CORE FIFO -/32-> Gearbox/Block Alignment -/66-> D
 
 ## Testing Latency
 
-## On-Chip Loopback
+### On-Chip Loopback
 TODO
 
-## Real World Latency
+### Real World Latency
 
 Since this is a real core that I actually use, I figured it made sense to see what sort of latency I could achieve with real signals originating off-chip.
 Unfortunately, testing real world latency is non-trivial. I don't have access to professional networking characterization tools, so I did the best I could with a 40GB NIC on a standard computer running Linux.
