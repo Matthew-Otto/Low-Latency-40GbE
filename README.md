@@ -1,5 +1,5 @@
 # (Under Construction)
-# Low latency 40GB Ethernet soft core.
+# Low latency 40Gb Ethernet soft core.
 Designed for Stratix 10 series FPGAs
 with the goal of achieving the absolute minimum latency possible.
 
@@ -70,7 +70,7 @@ Once hardware timestamping has been enabled in the kernel, the NIC should genera
 The python script `utils/measure_loopback_latency.py` automates this process.
 To use this script, edit the `INTERFACE1` and `INTERFACE2` constants to match the two ports on your NIC, and then run the script. After a few seconds, the results will be printed to the console and a timeseries plot will be saved to `loopback_timeseries.png`.
 
-### Loopback delay results
+### NIC -> NIC Loopback delay results
 
 These are the results form my test setup:
 

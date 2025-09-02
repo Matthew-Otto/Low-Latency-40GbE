@@ -1,0 +1,53 @@
+import cocotb
+import random
+import time
+from cocotb.triggers import Timer, ReadOnly, ReadWrite, ClockCycles, RisingEdge, FallingEdge
+from cocotb.clock import Clock
+
+state = 0
+def scramble_block(payload):
+    global state
+    scrambled = 0
+    for i in range(64):
+        in_bit = (payload >> i) & 1
+        tap = ((state >> 57) & 1) ^ ((state >> 38) & 1)
+        out_bit = in_bit ^ tap
+        scrambled |= (out_bit << i)
+        # shift in scrambled output bit
+        state = ((state << 1) & ((1 << 58) - 1)) | out_bit
+    return scrambled
+
+
+@cocotb.coroutine
+async def reset(dut):
+    await RisingEdge(dut.clk)
+    dut.reset.value = 1
+    await ClockCycles(dut.clk, 5)
+    dut.reset.value = 0
+    print("DUT reset")
+
+
+@cocotb.test()
+async def test_descrambler(dut):
+    seed = int(time.time())
+    random.seed(seed)
+    print(f"using seed: {seed}")
+
+    cocotb.start_soon(Clock(dut.clk, 2, units="ps").start())
+    await reset(dut)
+
+    dut.en.value = 1
+
+    global state
+    for _ in range(100000):
+        block = random.getrandbits(64)
+        scram_block = scramble_block(block)
+
+        dut.data_in.value = scram_block
+        await RisingEdge(dut.clk)
+
+        assert dut.data_out.value == block, f"Sim data {hex(dut.data_out.value)} =/= ref data {hex(ref_scram)}"
+
+
+
+    

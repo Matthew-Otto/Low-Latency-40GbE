@@ -3,3 +3,8 @@ qdb/
 *.qws
 quartus/
 log.txt
+
+__pycache__
+sim_build
+dump.fst
+results.xml

@@ -104,7 +104,7 @@ def main():
     fig = plt.figure(figsize=(8, 6))
     plt.scatter(x, latencies, color='b', s=1)
     plt.title("One Way Delay (loopback)")
-    plt.xlabel("Sequence Number")
+    plt.xlabel("Packet")
     plt.ylabel("Latency (ns)")
     plt.axis("tight")
     plt.text(0.62, 0.85, stats, transform=fig.transFigure, fontfamily='monospace',
