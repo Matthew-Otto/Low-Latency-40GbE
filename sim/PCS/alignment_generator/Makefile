@@ -1,7 +1,7 @@
 SIM ?= verilator
 TOPLEVEL_LANG = verilog
 
-DUT ?= block_sync
+DUT ?= alignment_generator
 # TOPLEVEL is the name of the toplevel module
 TOPLEVEL = $(DUT)
 # MODULE is the basename of the Python test file
