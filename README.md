@@ -9,7 +9,8 @@ I often use Ethernet to move test data between my PC and FPGA due to its simplic
 
 ### 40GbE and latency
 
-The gold standard for low latency networking is 10GbE (citation needed). 40GbE is composed of four bonded 10GbE channels. However, the latency will always be worse with 40GbE due to the need to synchronize and align the four channels at the receiver. If you are targeting the absolute lowest latency possible, 25GbE is the next logical step, but you'll have to contend with FEC.
+The gold standard for low latency networking is 10GbE (citation needed). 40GbE is composed of four bonded 10GbE channels. The added complexity of this bonding means the best 40GbE implementation will always be slower than the best 10GbE implementation.
+If you are targeting the absolute lowest latency possible, 25GbE is the next logical step, but overcoming FEC may be a significant obstacle.
 
 ## Design
 
@@ -28,9 +29,12 @@ Since this is a real core that I actually use, I figured it made sense to see wh
 Unfortunately, testing real world latency is non-trivial. I don't have access to professional networking characterization tools, so I did the best I could with a 40GB NIC on a standard computer running Linux.
 
 Datapath: \
-Host PC (tx) -> NIC -> 1M DAC -> FPGA PMA -> FPGA PCS/MAC (rx) \
-                                             v \
+```
+Host PC (tx) -> NIC -> 1M DAC -> FPGA PMA -> FPGA PCS/MAC (rx)
+                                                  |
+                                                  v
 Host PC (rx) <- NIC <- 1M DAC <- FPGA PMA <- FPGA MAC/PCS (tx)
+```
 
 ### Testing one-way prop delay over 1 meter DAC cable
 

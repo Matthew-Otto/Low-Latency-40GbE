@@ -53,9 +53,10 @@ module eth_40gb (
   logic       rx_blk_lock;
 
   // PHY
-  logic [3:0] tx_clk;
+  logic [3:0] tx_phy_clk;
   logic [3:0] rx_phy_clk;
   logic [3:0] loopback_en;
+  logic [127:0] tx_parallel_data;
   logic [127:0] rx_parallel_data;
 
 
@@ -122,8 +123,6 @@ module eth_40gb (
     .rx_digitalreset_stat (rx_digitalreset_stat)  //   input,  width = 4, rx_digitalreset_stat.rx_digitalreset_stat
   );
 
-  logic [3:0] tx_clkout;
-
   //// QSFP PHY
   qsfp_phy_40gbe phy_40g (
     .tx_analogreset          (tx_analog_reset),          //   input,    width = 4,          tx_analogreset.tx_analogreset
@@ -143,11 +142,11 @@ module eth_40gb (
     .rx_seriallpbken         (loopback_en),         //   input,    width = 4,         rx_seriallpbken.rx_seriallpbken
     .rx_is_lockedtoref       (),       //  output,    width = 4,       rx_is_lockedtoref.rx_is_lockedtoref
     .rx_is_lockedtodata      (rx_is_lockedtodata),      //  output,    width = 4,      rx_is_lockedtodata.rx_is_lockedtodata
-    .tx_coreclkin            (),            //   input,    width = 4,            tx_coreclkin.clk
+    .tx_coreclkin            ({4{core_clk}}),            //   input,    width = 4,            tx_coreclkin.clk
     .rx_coreclkin            ({4{core_clk}}),            //   input,    width = 4,            rx_coreclkin.clk
-    .tx_clkout               (),               //  output,    width = 4,               tx_clkout.clk
+    .tx_clkout               (tx_phy_clk),               //  output,    width = 4,               tx_clkout.clk
     .rx_clkout               (rx_phy_clk),               //  output,    width = 4,               rx_clkout.clk
-    .tx_parallel_data        (),        //   input,  width = 128,        tx_parallel_data.tx_parallel_data
+    .tx_parallel_data        (tx_parallel_data),        //   input,  width = 128,        tx_parallel_data.tx_parallel_data
     .rx_parallel_data        (rx_parallel_data),        //  output,  width = 128,        rx_parallel_data.rx_parallel_data
     .unused_tx_parallel_data (), //   input,  width = 192, unused_tx_parallel_data.unused_tx_parallel_data
     .unused_rx_parallel_data ()  //  output,  width = 188, unused_rx_parallel_data.unused_rx_parallel_data
@@ -164,9 +163,13 @@ module eth_40gb (
   eth_40gb_pcs eth_40gb_pcs_i (
     .core_clk(core_clk),
     .core_reset(reset_master),
+    .tx_data_ready(),
+    .tx_data_valid(),
+    .tx_data(),
     .rx_phy_clk(rx_phy_clk),
     .rx_parallel_data(rx_parallel_data),
-    .tx_parallel_data()
+    .tx_phy_clk(tx_phy_clk),
+    .tx_parallel_data(tx_parallel_data)
   );
 
   logic [29:0] ledcnt;

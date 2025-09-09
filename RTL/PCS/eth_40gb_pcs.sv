@@ -2,13 +2,20 @@ module eth_40gb_pcs (
   input  logic         core_clk,
   input  logic         core_reset,
 
+  // MAC interface
+  output logic         tx_data_ready,
+  input  logic         tx_data_valid,
+  input  logic [255:0] tx_data,
+
+  // Serial interface
   input  logic [3:0]   rx_phy_clk,
   input  logic [127:0] rx_parallel_data,
   
+  input  logic [3:0]   tx_phy_clk,
   output logic [127:0] tx_parallel_data
 );
   
-  genvar i;
+  genvar i, j;
 
   typedef enum logic [7:0] {
     C_IDLE = 8'h07,
@@ -24,7 +31,10 @@ module eth_40gb_pcs (
     C_K28_7 = 8'hFC
   } ctrl_codes;
   
-  //// RX
+
+  ////////////////////////////////////////////////////////////////////
+  //// RX ////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////
   logic [3:0] bitslip;
   logic [3:0] block_locked;
   logic [65:0] rx_scrambled [3:0];
@@ -65,8 +75,115 @@ module eth_40gb_pcs (
   endgenerate
 
 
+  ////////////////////////////////////////////////////////////////////
+  //// TX ////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////
 
+  logic         scrambler_en;
+  logic         jam_alignment_marker;
+  logic [3:0]   jam_next_cycle;
+  logic [255:0] tx_scrambler_in;
+  logic [255:0] tx_scrambler_out;
+  logic [65:0]  tx_scrambled_block [3:0];
+  logic [65:0]  tx_alignment_marker [3:0];
+  logic [65:0]  tx_lane [3:0];
 
+  enum logic [1:0] {
+    S_CTRL = 2'b01,
+    S_DATA = 2'b10
+  } sync_header;
 
+  enum {
+    TX_STALL_IDLE,
+    TX_IDLE,
+    TX_STALL_DATA,
+    TX_DATA
+  } tx_state, next_tx_state;
+
+  always_ff @(posedge core_clk or posedge core_reset) begin
+    if (core_reset) tx_state <= TX_STALL_IDLE;
+    else            tx_state <= next_tx_state;
+  end
+
+  // BOZO: can remove a cycle of latency by not waiting to assert ready
+  // may not need this state machine at all
+  always_comb begin
+    next_tx_state = tx_state;
+    tx_data_ready = 0;
+    scrambler_en = 0;
+    jam_alignment_marker = 0;
+    
+    case (tx_state)
+      TX_STALL_IDLE : begin
+        jam_alignment_marker = 1;
+        next_tx_state = TX_IDLE;
+      end
+
+      TX_IDLE : begin
+        scrambler_en = 1;
+        sync_header = S_CTRL;
+        tx_scrambler_in = {4{56'h0, 8'h78}};
+
+        if (jam_next_cycle[0])
+          next_tx_state = TX_STALL_IDLE;
+        else if (tx_data_valid)
+          next_tx_state = TX_DATA;
+      end
+
+      TX_STALL_DATA : begin
+        jam_alignment_marker = 1;
+        next_tx_state = TX_DATA;
+      end
+
+      TX_DATA : begin
+        scrambler_en = 1;
+        tx_data_ready = 1;
+        sync_header = S_DATA;
+        tx_scrambler_in = tx_data;
+
+        if (jam_next_cycle[0])
+          next_tx_state = TX_STALL_DATA;
+        // if no data goto idle
+      end
+    endcase
+  end
+
+  scrambler scrambler_i (
+    .clk(core_clk),
+    .reset(core_reset),
+    .en(scrambler_en),
+    .data_in(tx_scrambler_in),
+    .data_out(tx_scrambler_out)
+  );
+
+  generate
+    for (i = 0; i < 4; i++) begin
+      assign tx_scrambled_block[i] = {tx_scrambler_out[i*64+:64], sync_header};
+
+      alignment_generator #(
+        .LANE_NUMBER(i)
+      ) alignment_generator_i (
+        .clk(core_clk),
+        .reset(core_reset),
+        .block_in(tx_scrambled_block[i]),
+        .marker_out(tx_alignment_marker[i]),
+        .jam_next_cycle(jam_next_cycle[i])
+      );
+
+      assign tx_lane[i] = jam_alignment_marker ? tx_alignment_marker[i] : tx_scrambled_block[i];
+
+      tx_async_gearbox tx_async_gearbox_i (
+        .clk_in(core_clk),
+        .clk_in_reset(core_reset),
+        .clk_out(tx_phy_clk[i]),
+        .clk_out_reset(),
+        .data_in(tx_lane[i]),
+        .valid_in(1),
+        .data_out(tx_parallel_data[i*32+:32]),
+        .valid_out()
+      );
+
+    end
+  endgenerate
 
 endmodule : eth_40gb_pcs
