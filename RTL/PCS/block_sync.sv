@@ -1,3 +1,5 @@
+// RX block sync
+// forces RX gearbox to slip until 64 out of 65 consecutive blocks have valid sync headers
 
 module block_sync (
   input  logic       clk,
@@ -46,10 +48,12 @@ module block_sync (
       SYNC : begin
         next_sync_cnt = sync_cnt + 1;
 
-        if (error_cnt[1])
+        if (error_cnt[1]) begin
           next_state = LOS;
-        else if (sync_cnt[6])
+          bitslip = 1;
+        end else if (sync_cnt[6]) begin
           next_state = LOCKED;
+        end
       end
 
       LOCKED : begin
@@ -58,7 +62,6 @@ module block_sync (
       end
     endcase
   end
-
 
   always_ff @(posedge clk, posedge reset) begin
     if (reset || clear_history) begin
