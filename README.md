@@ -14,6 +14,8 @@ If you are targeting the absolute lowest latency possible, 25GbE is the next log
 
 ## Design
 
+TODO: diagrams
+
 PMA -> Deserializer -/32-> PCS/CORE FIFO -/32-> Gearbox/Block Alignment -/66-> Descrambler -/66-> Decoder -/64-> MAC
 
 

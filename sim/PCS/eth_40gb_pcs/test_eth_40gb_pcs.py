@@ -15,8 +15,33 @@ async def reset(dut):
     print("DUT reset")
 
 
+async def loopback(dut):
+    while True:
+        await RisingEdge(dut.tx_phy_clk[0])
+        dut.rx_parallel_data.value = dut.tx_parallel_data.value
+
 
 @cocotb.test()
+async def test_loopback(dut):
+    dut._log.setLevel("DEBUG")
+
+    seed = int(time.time())
+    random.seed(seed)
+    print(f"using seed: {seed}")
+
+    iters = 10000
+
+    cocotb.start_soon(Clock(dut.core_clk, 66, units="ps").start())
+    for i in range(4):
+        cocotb.start_soon(Clock(dut.tx_phy_clk[i], 32, units="ps").start())
+        cocotb.start_soon(Clock(dut.rx_phy_clk[i], 32, units="ps").start())
+    await reset(dut)
+    cocotb.start_soon(loopback(dut))
+
+    await ClockCycles(dut.core_clk, 2**16)
+
+
+#@cocotb.test()
 async def test_pcs_tx(dut):
     dut._log.setLevel("DEBUG")
 

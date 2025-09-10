@@ -36,6 +36,8 @@ module eth_40gb_pcs (
   //// RX ////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
   logic [3:0] bitslip;
+  logic [3:0] marker_detect;
+  logic [3:0] bip_valid;
   logic [3:0] block_locked;
   logic [65:0] rx_scrambled [3:0];
   (* preserve_for_debug *) logic [65:0] rx_descrambled [3:0];
@@ -60,6 +62,16 @@ module eth_40gb_pcs (
         .sync_bits(rx_scrambled[i][1:0]),
         .bitslip(bitslip[i]),
         .block_locked(block_locked[i])
+      );
+
+      alignment_extractor #(
+        .LANE_NUMBER(i)
+      ) alignment_extractor_1 (
+        .clk(core_clk),
+        .reset(core_reset),
+        .block_in(rx_scrambled[i]),
+        .marker_detect(marker_detect[i]),
+        .bip_valid(bip_valid[i])
       );
 
       descrambler descrambler_i (
@@ -157,7 +169,7 @@ module eth_40gb_pcs (
   );
 
   generate
-    for (i = 0; i < 4; i++) begin
+    for (i = 0; i < 4; i++) begin : block_distribution
       assign tx_scrambled_block[i] = {tx_scrambler_out[i*64+:64], sync_header};
 
       alignment_generator #(

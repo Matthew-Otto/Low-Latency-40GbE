@@ -18,7 +18,7 @@ module rx_async_gearbox (
   output logic        valid_out
 );
 
-  localparam BUFFER_SIZE = 16;
+  localparam BUFFER_SIZE = 8;
   localparam ADDR_SIZE = $clog2(BUFFER_SIZE);
   localparam PTR_SIZE = $clog2(BUFFER_SIZE<<5);
 
