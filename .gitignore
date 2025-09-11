@@ -2,6 +2,7 @@ dni/
 qdb/
 *.qws
 quartus/
+!*.qsf
 log.txt
 
 __pycache__

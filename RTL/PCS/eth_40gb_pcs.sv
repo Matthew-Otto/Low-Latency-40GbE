@@ -3,9 +3,9 @@ module eth_40gb_pcs (
   input  logic         core_reset,
 
   // MAC interface
-  output logic         tx_data_ready,
-  input  logic         tx_data_valid,
   input  logic [255:0] tx_data,
+  input  logic [31:0]  tx_data_valid,
+  input  logic         tx_data_ready,
 
   // Serial interface
   input  logic [3:0]   rx_phy_clk,
@@ -96,86 +96,44 @@ module eth_40gb_pcs (
   //// TX ////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
 
-  logic         scrambler_en;
   logic         jam_alignment_marker;
   logic [3:0]   jam_next_cycle;
+  logic [65:0]  tx_encoded_block [3:0];
   logic [255:0] tx_encoded_block4;
   logic [255:0] tx_scrambler_out;
   logic [65:0]  tx_scrambled_block [3:0];
   logic [65:0]  tx_alignment_marker [3:0];
   logic [65:0]  tx_lane [3:0];
 
-  enum logic [1:0] {
-    S_CTRL = 2'b01,
-    S_DATA = 2'b10
-  } sync_header;
+  always_ff @(posedge core_clk)
+    jam_alignment_marker <= jam_next_cycle[0];
 
-  enum {
-    TX_STALL_IDLE,
-    TX_IDLE,
-    TX_STALL_DATA,
-    TX_DATA
-  } tx_state, next_tx_state;
-
-  always_ff @(posedge core_clk or posedge core_reset) begin
-    if (core_reset) tx_state <= TX_STALL_IDLE;
-    else            tx_state <= next_tx_state;
-  end
-
-  // BOZO: can remove a cycle of latency by not waiting to assert ready
-  // may not need this state machine at all
-  always_comb begin
-    next_tx_state = tx_state;
-    tx_data_ready = 0;
-    scrambler_en = 0;
-    jam_alignment_marker = 0;
-    
-    case (tx_state)
-      TX_STALL_IDLE : begin
-        jam_alignment_marker = 1;
-        next_tx_state = TX_IDLE;
-      end
-
-      TX_IDLE : begin
-        scrambler_en = 1;
-        sync_header = S_CTRL;
-        tx_encoded_block4 = {4{56'h0, 8'h78}};
-
-        if (jam_next_cycle[0])
-          next_tx_state = TX_STALL_IDLE;
-        else if (tx_data_valid)
-          next_tx_state = TX_DATA;
-      end
-
-      TX_STALL_DATA : begin
-        jam_alignment_marker = 1;
-        next_tx_state = TX_DATA;
-      end
-
-      TX_DATA : begin
-        scrambler_en = 1;
-        tx_data_ready = 1;
-        sync_header = S_DATA;
-        tx_encoded_block4 = tx_data;
-
-        if (jam_next_cycle[0])
-          next_tx_state = TX_STALL_DATA;
-        // if no data goto idle
-      end
-    endcase
-  end
+  generate
+    for (i = 0; i < 4; i++) begin : block_encoding
+      block_encoder block_encoder_i (
+        .clk(core_clk),
+        .reset(core_reset),
+        .en(~jam_alignment_marker),
+        .data_in(tx_data[i*64+:64]),
+        .valid_bytes(tx_data_valid[i*8+:8]),
+        .block_out(tx_encoded_block[i])
+      );
+    end
+  endgenerate
+  
+  assign tx_encoded_block4 = {tx_encoded_block[3][65:2],tx_encoded_block[2][65:2],tx_encoded_block[1][65:2],tx_encoded_block[0][65:2]};
 
   scrambler scrambler_i (
     .clk(core_clk),
     .reset(core_reset),
-    .en(scrambler_en),
+    .en(~jam_alignment_marker),
     .data_in(tx_encoded_block4),
     .data_out(tx_scrambler_out)
   );
 
   generate
     for (i = 0; i < 4; i++) begin : block_distribution
-      assign tx_scrambled_block[i] = {tx_scrambler_out[i*64+:64], sync_header};
+      assign tx_scrambled_block[i] = {tx_scrambler_out[i*64+:64], tx_encoded_block[i][1:0]};
 
       alignment_generator #(
         .LANE_NUMBER(i)
