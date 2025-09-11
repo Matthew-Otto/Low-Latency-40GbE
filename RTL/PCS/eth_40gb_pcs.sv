@@ -38,9 +38,10 @@ module eth_40gb_pcs (
   logic [3:0] bitslip;
   logic [3:0] marker_detect;
   logic [3:0] bip_valid;
-  logic [3:0] block_locked;
+  (* preserve_for_debug *) logic [3:0] block_locked;
   logic [65:0] rx_scrambled [3:0];
-  (* preserve_for_debug *) logic [65:0] rx_descrambled [3:0];
+  logic [255:0] rx_descrambled;
+  logic [65:0] rx_encoded [3:0];
 
   generate
     for (i = 0; i < 4; i++) begin
@@ -74,17 +75,21 @@ module eth_40gb_pcs (
         .bip_valid(bip_valid[i])
       );
 
-      descrambler descrambler_i (
-        .clk(core_clk),
-        .reset(core_reset),
-        .en(block_locked[i]),
-        .data_in(rx_scrambled[i][65:2]), // BOZO might need to reverse block bit-order
-        .data_out(rx_descrambled[i][65:2])
-      );
-      assign rx_descrambled[i][1:0] = rx_scrambled[i][1:0];
-
     end
   endgenerate
+
+  descrambler descrambler_i (
+    .clk(core_clk),
+    .reset(core_reset),
+    .bypass(|marker_detect),
+    .data_in({rx_scrambled[3][65:2],rx_scrambled[2][65:2],rx_scrambled[1][65:2],rx_scrambled[0][65:2]}),
+    .data_out(rx_descrambled)
+  );
+
+  always_comb begin
+    for (int k = 0; k < 4; k++)
+      rx_encoded[k] = {rx_descrambled[k*64+:64],rx_scrambled[k][1:0]};
+  end
 
 
   ////////////////////////////////////////////////////////////////////
@@ -94,7 +99,7 @@ module eth_40gb_pcs (
   logic         scrambler_en;
   logic         jam_alignment_marker;
   logic [3:0]   jam_next_cycle;
-  logic [255:0] tx_scrambler_in;
+  logic [255:0] tx_encoded_block4;
   logic [255:0] tx_scrambler_out;
   logic [65:0]  tx_scrambled_block [3:0];
   logic [65:0]  tx_alignment_marker [3:0];
@@ -134,7 +139,7 @@ module eth_40gb_pcs (
       TX_IDLE : begin
         scrambler_en = 1;
         sync_header = S_CTRL;
-        tx_scrambler_in = {4{56'h0, 8'h78}};
+        tx_encoded_block4 = {4{56'h0, 8'h78}};
 
         if (jam_next_cycle[0])
           next_tx_state = TX_STALL_IDLE;
@@ -151,7 +156,7 @@ module eth_40gb_pcs (
         scrambler_en = 1;
         tx_data_ready = 1;
         sync_header = S_DATA;
-        tx_scrambler_in = tx_data;
+        tx_encoded_block4 = tx_data;
 
         if (jam_next_cycle[0])
           next_tx_state = TX_STALL_DATA;
@@ -164,7 +169,7 @@ module eth_40gb_pcs (
     .clk(core_clk),
     .reset(core_reset),
     .en(scrambler_en),
-    .data_in(tx_scrambler_in),
+    .data_in(tx_encoded_block4),
     .data_out(tx_scrambler_out)
   );
 

@@ -27,8 +27,9 @@
         active_scope: Some(WaveScope((
             strs: [
                 "eth_40gb_pcs",
+                "rx_encoded",
             ],
-            id: Wellen((2)),
+            id: Wellen((4)),
         ))),
         items_tree: (
             items: [
@@ -46,6 +47,30 @@
                 ),
                 (
                     item_ref: (3),
+                    level: 0,
+                    unfolded: true,
+                    selected: false,
+                ),
+                (
+                    item_ref: (45),
+                    level: 0,
+                    unfolded: true,
+                    selected: false,
+                ),
+                (
+                    item_ref: (46),
+                    level: 0,
+                    unfolded: true,
+                    selected: false,
+                ),
+                (
+                    item_ref: (48),
+                    level: 0,
+                    unfolded: true,
+                    selected: false,
+                ),
+                (
+                    item_ref: (47),
                     level: 0,
                     unfolded: true,
                     selected: false,
@@ -242,6 +267,126 @@
                     unfolded: true,
                     selected: false,
                 ),
+                (
+                    item_ref: (44),
+                    level: 0,
+                    unfolded: true,
+                    selected: false,
+                ),
+                (
+                    item_ref: (49),
+                    level: 0,
+                    unfolded: true,
+                    selected: false,
+                ),
+                (
+                    item_ref: (58),
+                    level: 0,
+                    unfolded: true,
+                    selected: false,
+                ),
+                (
+                    item_ref: (59),
+                    level: 0,
+                    unfolded: true,
+                    selected: false,
+                ),
+                (
+                    item_ref: (60),
+                    level: 0,
+                    unfolded: true,
+                    selected: false,
+                ),
+                (
+                    item_ref: (61),
+                    level: 0,
+                    unfolded: true,
+                    selected: false,
+                ),
+                (
+                    item_ref: (50),
+                    level: 0,
+                    unfolded: true,
+                    selected: false,
+                ),
+                (
+                    item_ref: (62),
+                    level: 0,
+                    unfolded: true,
+                    selected: false,
+                ),
+                (
+                    item_ref: (63),
+                    level: 0,
+                    unfolded: true,
+                    selected: false,
+                ),
+                (
+                    item_ref: (64),
+                    level: 0,
+                    unfolded: true,
+                    selected: false,
+                ),
+                (
+                    item_ref: (65),
+                    level: 0,
+                    unfolded: true,
+                    selected: false,
+                ),
+                (
+                    item_ref: (66),
+                    level: 0,
+                    unfolded: true,
+                    selected: false,
+                ),
+                (
+                    item_ref: (67),
+                    level: 0,
+                    unfolded: true,
+                    selected: false,
+                ),
+                (
+                    item_ref: (68),
+                    level: 0,
+                    unfolded: true,
+                    selected: false,
+                ),
+                (
+                    item_ref: (56),
+                    level: 0,
+                    unfolded: true,
+                    selected: false,
+                ),
+                (
+                    item_ref: (51),
+                    level: 0,
+                    unfolded: true,
+                    selected: false,
+                ),
+                (
+                    item_ref: (52),
+                    level: 0,
+                    unfolded: true,
+                    selected: false,
+                ),
+                (
+                    item_ref: (53),
+                    level: 0,
+                    unfolded: true,
+                    selected: false,
+                ),
+                (
+                    item_ref: (54),
+                    level: 0,
+                    unfolded: true,
+                    selected: false,
+                ),
+                (
+                    item_ref: (55),
+                    level: 0,
+                    unfolded: true,
+                    selected: false,
+                ),
             ],
         ),
         displayed_items: {
@@ -250,7 +395,17 @@
                 background_color: None,
                 name: None,
             )),
-            (1): Variable((
+            (62): Divider((
+                color: None,
+                background_color: None,
+                name: None,
+            )),
+            (24): Divider((
+                color: None,
+                background_color: None,
+                name: None,
+            )),
+            (48): Variable((
                 variable_ref: (
                     path: (
                         strs: [
@@ -258,149 +413,19 @@
                         ],
                         id: Wellen((2)),
                     ),
-                    name: "core_clk",
-                    id: Wellen((10)),
+                    name: "tx_encoded_block4",
+                    id: Wellen((35)),
                 ),
                 color: None,
                 background_color: None,
-                display_name: "core_clk",
+                display_name: "tx_encoded_block4 [255:0]",
                 display_name_type: Unique,
                 manual_name: None,
                 format: None,
                 field_formats: [],
                 height_scaling_factor: None,
             )),
-            (5): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "eth_40gb_pcs",
-                            "tx_lane",
-                        ],
-                        id: Wellen((7)),
-                    ),
-                    name: "[0]",
-                    id: Wellen((44)),
-                ),
-                color: None,
-                background_color: None,
-                display_name: "…tx_lane.[0] [65:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (27): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "eth_40gb_pcs",
-                            "genblk1[0]",
-                            "rx_async_gearbox_i",
-                        ],
-                        id: Wellen((50)),
-                    ),
-                    name: "clk_out",
-                    id: Wellen((359)),
-                ),
-                color: None,
-                background_color: None,
-                display_name: "clk_out",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (36): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "eth_40gb_pcs",
-                            "genblk1[0]",
-                            "alignment_extractor_1",
-                        ],
-                        id: Wellen((45)),
-                    ),
-                    name: "bip_valid",
-                    id: Wellen((332)),
-                ),
-                color: None,
-                background_color: None,
-                display_name: "bip_valid",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (26): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "eth_40gb_pcs",
-                            "genblk1[0]",
-                            "rx_async_gearbox_i",
-                        ],
-                        id: Wellen((50)),
-                    ),
-                    name: "clk_in",
-                    id: Wellen((357)),
-                ),
-                color: None,
-                background_color: None,
-                display_name: "clk_in",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (21): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "eth_40gb_pcs",
-                            "rx_scrambled",
-                        ],
-                        id: Wellen((3)),
-                    ),
-                    name: "[3]",
-                    id: Wellen((26)),
-                ),
-                color: None,
-                background_color: None,
-                display_name: "…rx_scrambled.[3] [65:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (29): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "eth_40gb_pcs",
-                            "genblk1[0]",
-                            "rx_async_gearbox_i",
-                        ],
-                        id: Wellen((50)),
-                    ),
-                    name: "w_ptr_b",
-                    id: Wellen((390)),
-                ),
-                color: None,
-                background_color: None,
-                display_name: "w_ptr_b [8:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (12): Variable((
+            (9): Variable((
                 variable_ref: (
                     path: (
                         strs: [
@@ -409,44 +434,24 @@
                         ],
                         id: Wellen((6)),
                     ),
-                    name: "[3]",
-                    id: Wellen((43)),
+                    name: "[0]",
+                    id: Wellen((41)),
                 ),
                 color: None,
                 background_color: None,
-                display_name: "…tx_alignment_marker.[3] [65:0]",
+                display_name: "…tx_alignment_marker.[0] [65:0]",
                 display_name_type: Unique,
                 manual_name: None,
                 format: None,
                 field_formats: [],
                 height_scaling_factor: None,
             )),
-            (22): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "eth_40gb_pcs",
-                        ],
-                        id: Wellen((2)),
-                    ),
-                    name: "bitslip",
-                    id: Wellen((19)),
-                ),
-                color: None,
-                background_color: None,
-                display_name: "eth_40gb_pcs.bitslip [3:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: Some("Binary"),
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (16): Divider((
+            (53): Divider((
                 color: None,
                 background_color: None,
                 name: None,
             )),
-            (34): Variable((
+            (32): Variable((
                 variable_ref: (
                     path: (
                         strs: [
@@ -454,14 +459,40 @@
                             "genblk1[0]",
                             "block_sync_i",
                         ],
-                        id: Wellen((46)),
+                        id: Wellen((48)),
                     ),
-                    name: "error_cnt",
-                    id: Wellen((345)),
+                    name: "state",
+                    id: Wellen((356)),
                 ),
                 color: None,
                 background_color: None,
-                display_name: "error_cnt [6:0]",
+                display_name: "state [31:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: Some("Enum"),
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (47): Divider((
+                color: None,
+                background_color: None,
+                name: None,
+            )),
+            (11): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "eth_40gb_pcs",
+                            "tx_alignment_marker",
+                        ],
+                        id: Wellen((6)),
+                    ),
+                    name: "[2]",
+                    id: Wellen((43)),
+                ),
+                color: None,
+                background_color: None,
+                display_name: "…tx_alignment_marker.[2] [65:0]",
                 display_name_type: Unique,
                 manual_name: None,
                 format: None,
@@ -489,7 +520,27 @@
                 field_formats: [],
                 height_scaling_factor: None,
             )),
-            (6): Variable((
+            (4): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "eth_40gb_pcs",
+                        ],
+                        id: Wellen((2)),
+                    ),
+                    name: "jam_alignment_marker",
+                    id: Wellen((33)),
+                ),
+                color: None,
+                background_color: None,
+                display_name: "jam_alignment_marker",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (8): Variable((
                 variable_ref: (
                     path: (
                         strs: [
@@ -498,22 +549,17 @@
                         ],
                         id: Wellen((7)),
                     ),
-                    name: "[1]",
-                    id: Wellen((45)),
+                    name: "[3]",
+                    id: Wellen((48)),
                 ),
                 color: None,
                 background_color: None,
-                display_name: "…tx_lane.[1] [65:0]",
+                display_name: "…tx_lane.[3] [65:0]",
                 display_name_type: Unique,
                 manual_name: None,
                 format: None,
                 field_formats: [],
                 height_scaling_factor: None,
-            )),
-            (35): Divider((
-                color: None,
-                background_color: None,
-                name: None,
             )),
             (20): Variable((
                 variable_ref: (
@@ -536,6 +582,230 @@
                 field_formats: [],
                 height_scaling_factor: None,
             )),
+            (34): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "eth_40gb_pcs",
+                            "genblk1[0]",
+                            "block_sync_i",
+                        ],
+                        id: Wellen((48)),
+                    ),
+                    name: "error_cnt",
+                    id: Wellen((355)),
+                ),
+                color: None,
+                background_color: None,
+                display_name: "error_cnt [6:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (16): Divider((
+                color: None,
+                background_color: None,
+                name: None,
+            )),
+            (49): Divider((
+                color: None,
+                background_color: None,
+                name: None,
+            )),
+            (13): Divider((
+                color: None,
+                background_color: None,
+                name: None,
+            )),
+            (1): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "eth_40gb_pcs",
+                        ],
+                        id: Wellen((2)),
+                    ),
+                    name: "core_clk",
+                    id: Wellen((10)),
+                ),
+                color: None,
+                background_color: None,
+                display_name: "core_clk",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (33): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "eth_40gb_pcs",
+                            "genblk1[0]",
+                            "block_sync_i",
+                        ],
+                        id: Wellen((48)),
+                    ),
+                    name: "sync_bits",
+                    id: Wellen((348)),
+                ),
+                color: None,
+                background_color: None,
+                display_name: "sync_bits [1:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: Some("Binary"),
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (38): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "eth_40gb_pcs",
+                            "genblk1[0]",
+                            "alignment_extractor_1",
+                        ],
+                        id: Wellen((47)),
+                    ),
+                    name: "marker_detect",
+                    id: Wellen((341)),
+                ),
+                color: None,
+                background_color: None,
+                display_name: "marker_detect",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (52): Divider((
+                color: None,
+                background_color: None,
+                name: None,
+            )),
+            (31): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "eth_40gb_pcs",
+                            "genblk1[0]",
+                            "rx_async_gearbox_i",
+                        ],
+                        id: Wellen((50)),
+                    ),
+                    name: "bitslip",
+                    id: Wellen((365)),
+                ),
+                color: None,
+                background_color: None,
+                display_name: "…rx_async_gearbox_i.bitslip",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (46): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "eth_40gb_pcs",
+                        ],
+                        id: Wellen((2)),
+                    ),
+                    name: "tx_state",
+                    id: Wellen((50)),
+                ),
+                color: None,
+                background_color: None,
+                display_name: "tx_state [31:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: Some("Enum"),
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (45): Divider((
+                color: None,
+                background_color: None,
+                name: None,
+            )),
+            (23): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "eth_40gb_pcs",
+                        ],
+                        id: Wellen((2)),
+                    ),
+                    name: "block_locked",
+                    id: Wellen((22)),
+                ),
+                color: None,
+                background_color: None,
+                display_name: "block_locked [3:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (63): Divider((
+                color: None,
+                background_color: None,
+                name: None,
+            )),
+            (7): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "eth_40gb_pcs",
+                            "tx_lane",
+                        ],
+                        id: Wellen((7)),
+                    ),
+                    name: "[2]",
+                    id: Wellen((47)),
+                ),
+                color: None,
+                background_color: None,
+                display_name: "…tx_lane.[2] [65:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (35): Divider((
+                color: None,
+                background_color: None,
+                name: None,
+            )),
+            (22): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "eth_40gb_pcs",
+                        ],
+                        id: Wellen((2)),
+                    ),
+                    name: "bitslip",
+                    id: Wellen((19)),
+                ),
+                color: None,
+                background_color: None,
+                display_name: "eth_40gb_pcs.bitslip [3:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: Some("Binary"),
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
             (10): Variable((
                 variable_ref: (
                     path: (
@@ -546,7 +816,7 @@
                         id: Wellen((6)),
                     ),
                     name: "[1]",
-                    id: Wellen((41)),
+                    id: Wellen((42)),
                 ),
                 color: None,
                 background_color: None,
@@ -557,7 +827,182 @@
                 field_formats: [],
                 height_scaling_factor: None,
             )),
-            (9): Variable((
+            (2): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "eth_40gb_pcs",
+                        ],
+                        id: Wellen((2)),
+                    ),
+                    name: "core_reset",
+                    id: Wellen((11)),
+                ),
+                color: None,
+                background_color: None,
+                display_name: "core_reset",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (54): Divider((
+                color: None,
+                background_color: None,
+                name: None,
+            )),
+            (27): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "eth_40gb_pcs",
+                            "genblk1[0]",
+                            "rx_async_gearbox_i",
+                        ],
+                        id: Wellen((50)),
+                    ),
+                    name: "clk_out",
+                    id: Wellen((361)),
+                ),
+                color: None,
+                background_color: None,
+                display_name: "clk_out",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (65): Divider((
+                color: None,
+                background_color: None,
+                name: None,
+            )),
+            (6): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "eth_40gb_pcs",
+                            "tx_lane",
+                        ],
+                        id: Wellen((7)),
+                    ),
+                    name: "[1]",
+                    id: Wellen((46)),
+                ),
+                color: None,
+                background_color: None,
+                display_name: "…tx_lane.[1] [65:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (29): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "eth_40gb_pcs",
+                            "genblk1[0]",
+                            "rx_async_gearbox_i",
+                        ],
+                        id: Wellen((50)),
+                    ),
+                    name: "w_ptr_b",
+                    id: Wellen((384)),
+                ),
+                color: None,
+                background_color: None,
+                display_name: "w_ptr_b [7:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (59): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "eth_40gb_pcs",
+                            "rx_encoded",
+                        ],
+                        id: Wellen((4)),
+                    ),
+                    name: "[1]",
+                    id: Wellen((29)),
+                ),
+                color: None,
+                background_color: None,
+                display_name: "…rx_encoded.[1] [65:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (67): Divider((
+                color: None,
+                background_color: None,
+                name: None,
+            )),
+            (28): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "eth_40gb_pcs",
+                            "genblk1[0]",
+                            "rx_async_gearbox_i",
+                        ],
+                        id: Wellen((50)),
+                    ),
+                    name: "data_in",
+                    id: Wellen((363)),
+                ),
+                color: None,
+                background_color: None,
+                display_name: "data_in [31:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (50): Divider((
+                color: None,
+                background_color: None,
+                name: None,
+            )),
+            (44): Divider((
+                color: None,
+                background_color: None,
+                name: None,
+            )),
+            (36): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "eth_40gb_pcs",
+                            "genblk1[0]",
+                            "alignment_extractor_1",
+                        ],
+                        id: Wellen((47)),
+                    ),
+                    name: "bip_valid",
+                    id: Wellen((342)),
+                ),
+                color: None,
+                background_color: None,
+                display_name: "bip_valid",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (12): Variable((
                 variable_ref: (
                     path: (
                         strs: [
@@ -566,39 +1011,69 @@
                         ],
                         id: Wellen((6)),
                     ),
-                    name: "[0]",
-                    id: Wellen((40)),
+                    name: "[3]",
+                    id: Wellen((44)),
                 ),
                 color: None,
                 background_color: None,
-                display_name: "…tx_alignment_marker.[0] [65:0]",
+                display_name: "…tx_alignment_marker.[3] [65:0]",
                 display_name_type: Unique,
                 manual_name: None,
                 format: None,
                 field_formats: [],
                 height_scaling_factor: None,
             )),
-            (24): Divider((
-                color: None,
-                background_color: None,
-                name: None,
-            )),
-            (38): Variable((
+            (58): Variable((
                 variable_ref: (
                     path: (
                         strs: [
                             "eth_40gb_pcs",
-                            "genblk1[0]",
-                            "alignment_extractor_1",
+                            "rx_encoded",
                         ],
-                        id: Wellen((45)),
+                        id: Wellen((4)),
                     ),
-                    name: "marker_detect",
-                    id: Wellen((331)),
+                    name: "[0]",
+                    id: Wellen((28)),
                 ),
                 color: None,
                 background_color: None,
-                display_name: "…alignment_extractor_1.marker_detect",
+                display_name: "…rx_encoded.[0] [65:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (64): Divider((
+                color: None,
+                background_color: None,
+                name: None,
+            )),
+            (68): Divider((
+                color: None,
+                background_color: None,
+                name: None,
+            )),
+            (25): Divider((
+                color: None,
+                background_color: None,
+                name: None,
+            )),
+            (60): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "eth_40gb_pcs",
+                            "rx_encoded",
+                        ],
+                        id: Wellen((4)),
+                    ),
+                    name: "[2]",
+                    id: Wellen((30)),
+                ),
+                color: None,
+                background_color: None,
+                display_name: "…rx_encoded.[2] [65:0]",
                 display_name_type: Unique,
                 manual_name: None,
                 format: None,
@@ -626,154 +1101,49 @@
                 field_formats: [],
                 height_scaling_factor: None,
             )),
-            (14): Variable((
+            (5): Variable((
                 variable_ref: (
                     path: (
                         strs: [
                             "eth_40gb_pcs",
+                            "tx_lane",
                         ],
-                        id: Wellen((2)),
+                        id: Wellen((7)),
                     ),
-                    name: "tx_parallel_data",
-                    id: Wellen((18)),
+                    name: "[0]",
+                    id: Wellen((45)),
                 ),
                 color: None,
                 background_color: None,
-                display_name: "tx_parallel_data [127:0]",
+                display_name: "…tx_lane.[0] [65:0]",
                 display_name_type: Unique,
                 manual_name: None,
                 format: None,
                 field_formats: [],
                 height_scaling_factor: None,
             )),
-            (23): Variable((
+            (21): Variable((
                 variable_ref: (
                     path: (
                         strs: [
                             "eth_40gb_pcs",
+                            "rx_scrambled",
                         ],
-                        id: Wellen((2)),
+                        id: Wellen((3)),
                     ),
-                    name: "block_locked",
-                    id: Wellen((22)),
+                    name: "[3]",
+                    id: Wellen((26)),
                 ),
                 color: None,
                 background_color: None,
-                display_name: "block_locked [3:0]",
+                display_name: "…rx_scrambled.[3] [65:0]",
                 display_name_type: Unique,
                 manual_name: None,
                 format: None,
                 field_formats: [],
                 height_scaling_factor: None,
             )),
-            (33): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "eth_40gb_pcs",
-                            "genblk1[0]",
-                            "block_sync_i",
-                        ],
-                        id: Wellen((46)),
-                    ),
-                    name: "sync_bits",
-                    id: Wellen((338)),
-                ),
-                color: None,
-                background_color: None,
-                display_name: "sync_bits [1:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: Some("Binary"),
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (11): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "eth_40gb_pcs",
-                            "tx_alignment_marker",
-                        ],
-                        id: Wellen((6)),
-                    ),
-                    name: "[2]",
-                    id: Wellen((42)),
-                ),
-                color: None,
-                background_color: None,
-                display_name: "…tx_alignment_marker.[2] [65:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (28): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "eth_40gb_pcs",
-                            "genblk1[0]",
-                            "rx_async_gearbox_i",
-                        ],
-                        id: Wellen((50)),
-                    ),
-                    name: "data_in",
-                    id: Wellen((361)),
-                ),
-                color: None,
-                background_color: None,
-                display_name: "data_in [31:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (2): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "eth_40gb_pcs",
-                        ],
-                        id: Wellen((2)),
-                    ),
-                    name: "core_reset",
-                    id: Wellen((11)),
-                ),
-                color: None,
-                background_color: None,
-                display_name: "core_reset",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (32): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "eth_40gb_pcs",
-                            "genblk1[0]",
-                            "block_sync_i",
-                        ],
-                        id: Wellen((46)),
-                    ),
-                    name: "state",
-                    id: Wellen((346)),
-                ),
-                color: None,
-                background_color: None,
-                display_name: "state [31:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: Some("Enum"),
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (25): Divider((
+            (66): Divider((
                 color: None,
                 background_color: None,
                 name: None,
@@ -798,28 +1168,7 @@
                 field_formats: [],
                 height_scaling_factor: None,
             )),
-            (7): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "eth_40gb_pcs",
-                            "tx_lane",
-                        ],
-                        id: Wellen((7)),
-                    ),
-                    name: "[2]",
-                    id: Wellen((46)),
-                ),
-                color: None,
-                background_color: None,
-                display_name: "…tx_lane.[2] [65:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (31): Variable((
+            (26): Variable((
                 variable_ref: (
                     path: (
                         strs: [
@@ -829,19 +1178,19 @@
                         ],
                         id: Wellen((50)),
                     ),
-                    name: "bitslip",
-                    id: Wellen((363)),
+                    name: "clk_in",
+                    id: Wellen((359)),
                 ),
                 color: None,
                 background_color: None,
-                display_name: "…rx_async_gearbox_i.bitslip",
+                display_name: "clk_in",
                 display_name_type: Unique,
                 manual_name: None,
                 format: None,
                 field_formats: [],
                 height_scaling_factor: None,
             )),
-            (4): Variable((
+            (14): Variable((
                 variable_ref: (
                     path: (
                         strs: [
@@ -849,50 +1198,55 @@
                         ],
                         id: Wellen((2)),
                     ),
-                    name: "jam_alignment_marker",
-                    id: Wellen((32)),
+                    name: "tx_parallel_data",
+                    id: Wellen((18)),
                 ),
                 color: None,
                 background_color: None,
-                display_name: "jam_alignment_marker",
+                display_name: "tx_parallel_data [127:0]",
                 display_name_type: Unique,
                 manual_name: None,
                 format: None,
                 field_formats: [],
                 height_scaling_factor: None,
             )),
-            (13): Divider((
-                color: None,
-                background_color: None,
-                name: None,
-            )),
-            (8): Variable((
+            (61): Variable((
                 variable_ref: (
                     path: (
                         strs: [
                             "eth_40gb_pcs",
-                            "tx_lane",
+                            "rx_encoded",
                         ],
-                        id: Wellen((7)),
+                        id: Wellen((4)),
                     ),
                     name: "[3]",
-                    id: Wellen((47)),
+                    id: Wellen((31)),
                 ),
                 color: None,
                 background_color: None,
-                display_name: "…tx_lane.[3] [65:0]",
+                display_name: "…rx_encoded.[3] [65:0]",
                 display_name_type: Unique,
                 manual_name: None,
                 format: None,
                 field_formats: [],
                 height_scaling_factor: None,
             )),
+            (51): Divider((
+                color: None,
+                background_color: None,
+                name: None,
+            )),
+            (55): Divider((
+                color: None,
+                background_color: None,
+                name: None,
+            )),
         },
-        display_item_ref_counter: 39,
+        display_item_ref_counter: 68,
         viewports: [
             (
-                curr_left: (0.25002645893129555),
-                curr_right: (0.25034127343023843),
+                curr_left: (0.25008850371099717),
+                curr_right: (0.2503462521302054),
                 target_left: (0.0),
                 target_right: (1.0),
                 move_start_left: (0.0),
@@ -902,20 +1256,20 @@
             ),
         ],
         cursor: Some((1, [
-            1082376,
+            1082135,
         ])),
         markers: {},
-        focused_item: Some((34)),
+        focused_item: Some((52)),
         focused_transaction: (None, None),
         default_variable_name_type: Unique,
-        scroll_offset: 0.0,
+        scroll_offset: 205.36388,
         display_variable_indices: true,
         graphics: {},
     )),
     drag_started: false,
     drag_source_idx: None,
     drag_target_idx: Some((
-        before: (33),
+        before: (46),
         level: 0,
     )),
     previous_waves: None,

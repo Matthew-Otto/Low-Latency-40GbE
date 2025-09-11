@@ -8,7 +8,7 @@ state = 0
 def scramble_block(payload):
     global state
     scrambled = 0
-    for i in range(64):
+    for i in range(256):
         in_bit = (payload >> i) & 1
         tap = ((state >> 57) & 1) ^ ((state >> 38) & 1)
         out_bit = in_bit ^ tap
@@ -39,15 +39,11 @@ async def test_scrambler(dut):
     dut.en.value = 1
 
     global state
-    for _ in range(100):
-        block = random.getrandbits(64)
+    for _ in range(10000):
+        block = random.getrandbits(256)
         ref_scram = scramble_block(block)
 
         dut.data_in.value = block
         await RisingEdge(dut.clk)
 
         assert dut.data_out.value == ref_scram, f"Sim data {hex(dut.data_out.value)} =/= ref data {hex(ref_scram)}"
-
-
-
-    
