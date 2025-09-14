@@ -142,7 +142,7 @@ module eth_40gb (
     .rx_seriallpbken         (loopback_en),         //   input,    width = 4,         rx_seriallpbken.rx_seriallpbken
     .rx_is_lockedtoref       (),       //  output,    width = 4,       rx_is_lockedtoref.rx_is_lockedtoref
     .rx_is_lockedtodata      (rx_is_lockedtodata),      //  output,    width = 4,      rx_is_lockedtodata.rx_is_lockedtodata
-    .tx_coreclkin            ({4{core_clk}}),            //   input,    width = 4,            tx_coreclkin.clk
+    .tx_coreclkin            (),            //   input,    width = 4,            tx_coreclkin.clk
     .rx_coreclkin            ({4{core_clk}}),            //   input,    width = 4,            rx_coreclkin.clk
     .tx_clkout               (tx_phy_clk),               //  output,    width = 4,               tx_clkout.clk
     .rx_clkout               (rx_phy_clk),               //  output,    width = 4,               rx_clkout.clk

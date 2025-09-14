@@ -28,7 +28,7 @@ module rx_async_gearbox (
   logic [127:0] read_row;
   logic [65:0]  data_out_sel;
 
-  logic [31:0] buffer [BUFFER_SIZE-1:0];
+  (* ramstyle = "logic" *) logic [31:0] buffer [BUFFER_SIZE-1:0];
   logic [PTR_SIZE-1:0]  w_ptr_b, next_w_ptr_b;
   logic [ADDR_SIZE-1:0] w_addr_g;
 

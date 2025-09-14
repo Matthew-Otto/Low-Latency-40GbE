@@ -45,127 +45,109 @@
                     selected: false,
                 ),
                 (
-                    item_ref: (27),
+                    item_ref: (8),
                     level: 0,
                     unfolded: true,
                     selected: false,
                 ),
                 (
-                    item_ref: (39),
+                    item_ref: (10),
                     level: 0,
                     unfolded: true,
                     selected: false,
                 ),
                 (
-                    item_ref: (33),
+                    item_ref: (18),
                     level: 0,
                     unfolded: true,
                     selected: false,
                 ),
                 (
-                    item_ref: (67),
+                    item_ref: (3),
                     level: 0,
                     unfolded: true,
                     selected: false,
                 ),
                 (
-                    item_ref: (28),
+                    item_ref: (11),
                     level: 0,
                     unfolded: true,
                     selected: false,
                 ),
                 (
-                    item_ref: (29),
+                    item_ref: (12),
                     level: 0,
                     unfolded: true,
                     selected: false,
                 ),
                 (
-                    item_ref: (30),
+                    item_ref: (13),
                     level: 0,
                     unfolded: true,
                     selected: false,
                 ),
                 (
-                    item_ref: (31),
+                    item_ref: (14),
                     level: 0,
                     unfolded: true,
                     selected: false,
                 ),
                 (
-                    item_ref: (32),
+                    item_ref: (9),
                     level: 0,
                     unfolded: true,
                     selected: false,
                 ),
                 (
-                    item_ref: (48),
+                    item_ref: (15),
                     level: 0,
                     unfolded: true,
                     selected: false,
                 ),
                 (
-                    item_ref: (49),
+                    item_ref: (16),
                     level: 0,
                     unfolded: true,
                     selected: false,
                 ),
                 (
-                    item_ref: (26),
+                    item_ref: (17),
                     level: 0,
                     unfolded: true,
                     selected: false,
                 ),
                 (
-                    item_ref: (23),
+                    item_ref: (7),
                     level: 0,
                     unfolded: true,
                     selected: false,
                 ),
                 (
-                    item_ref: (45),
+                    item_ref: (4),
                     level: 0,
                     unfolded: true,
                     selected: false,
                 ),
                 (
-                    item_ref: (24),
+                    item_ref: (5),
                     level: 0,
                     unfolded: true,
                     selected: false,
                 ),
                 (
-                    item_ref: (25),
+                    item_ref: (6),
                     level: 0,
                     unfolded: true,
                     selected: false,
                 ),
                 (
-                    item_ref: (34),
+                    item_ref: (19),
                     level: 0,
                     unfolded: true,
                     selected: false,
                 ),
                 (
-                    item_ref: (46),
-                    level: 0,
-                    unfolded: true,
-                    selected: false,
-                ),
-                (
-                    item_ref: (47),
-                    level: 0,
-                    unfolded: true,
-                    selected: false,
-                ),
-                (
-                    item_ref: (66),
-                    level: 0,
-                    unfolded: true,
-                    selected: false,
-                ),
-                (
-                    item_ref: (35),
+                    item_ref: (20),
                     level: 0,
                     unfolded: true,
                     selected: false,
@@ -173,87 +155,7 @@
             ],
         ),
         displayed_items: {
-            (47): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "tx_async_gearbox",
-                        ],
-                        id: Wellen((2)),
-                    ),
-                    name: "next_rd_ptr",
-                    id: Wellen((63)),
-                ),
-                color: None,
-                background_color: None,
-                display_name: "next_rd_ptr [3:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (25): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "tx_async_gearbox",
-                        ],
-                        id: Wellen((2)),
-                    ),
-                    name: "clk_out_reset",
-                    id: Wellen((12)),
-                ),
-                color: None,
-                background_color: None,
-                display_name: "clk_out_reset",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (29): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "tx_async_gearbox",
-                        ],
-                        id: Wellen((2)),
-                    ),
-                    name: "wr_ptr_g",
-                    id: Wellen((58)),
-                ),
-                color: None,
-                background_color: None,
-                display_name: "wr_ptr_g [3:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: Some("Binary"),
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (2): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "tx_async_gearbox",
-                        ],
-                        id: Wellen((2)),
-                    ),
-                    name: "clk_in_reset",
-                    id: Wellen((10)),
-                ),
-                color: None,
-                background_color: None,
-                display_name: "clk_in_reset",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (66): Variable((
+            (20): Variable((
                 variable_ref: (
                     path: (
                         strs: [
@@ -267,201 +169,6 @@
                 color: None,
                 background_color: None,
                 display_name: "valid_out",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (32): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "tx_async_gearbox",
-                        ],
-                        id: Wellen((2)),
-                    ),
-                    name: "wr_ptr_sync",
-                    id: Wellen((61)),
-                ),
-                color: None,
-                background_color: None,
-                display_name: "wr_ptr_sync [3:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (23): Divider((
-                color: None,
-                background_color: None,
-                name: None,
-            )),
-            (28): Divider((
-                color: None,
-                background_color: None,
-                name: None,
-            )),
-            (46): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "tx_async_gearbox",
-                        ],
-                        id: Wellen((2)),
-                    ),
-                    name: "rd_ptr",
-                    id: Wellen((62)),
-                ),
-                color: None,
-                background_color: None,
-                display_name: "rd_ptr [3:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (24): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "tx_async_gearbox",
-                        ],
-                        id: Wellen((2)),
-                    ),
-                    name: "clk_out",
-                    id: Wellen((11)),
-                ),
-                color: None,
-                background_color: None,
-                display_name: "clk_out",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (35): Divider((
-                color: None,
-                background_color: None,
-                name: None,
-            )),
-            (39): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "tx_async_gearbox",
-                        ],
-                        id: Wellen((2)),
-                    ),
-                    name: "wr_addr",
-                    id: Wellen((54)),
-                ),
-                color: None,
-                background_color: None,
-                display_name: "wr_addr [10:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (30): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "tx_async_gearbox",
-                        ],
-                        id: Wellen((2)),
-                    ),
-                    name: "wr_ptr_g_sync1",
-                    id: Wellen((59)),
-                ),
-                color: None,
-                background_color: None,
-                display_name: "wr_ptr_g_sync1 [3:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: Some("Binary"),
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (33): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "tx_async_gearbox",
-                        ],
-                        id: Wellen((2)),
-                    ),
-                    name: "data_in",
-                    id: Wellen((13)),
-                ),
-                color: None,
-                background_color: None,
-                display_name: "data_in [65:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (31): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "tx_async_gearbox",
-                        ],
-                        id: Wellen((2)),
-                    ),
-                    name: "wr_ptr_g_sync2",
-                    id: Wellen((60)),
-                ),
-                color: None,
-                background_color: None,
-                display_name: "wr_ptr_g_sync2 [3:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: Some("Binary"),
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (67): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "tx_async_gearbox",
-                        ],
-                        id: Wellen((2)),
-                    ),
-                    name: "valid_in",
-                    id: Wellen((14)),
-                ),
-                color: None,
-                background_color: None,
-                display_name: "valid_in",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (34): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "tx_async_gearbox",
-                        ],
-                        id: Wellen((2)),
-                    ),
-                    name: "data_out",
-                    id: Wellen((15)),
-                ),
-                color: None,
-                background_color: None,
-                display_name: "data_out [31:0]",
                 display_name_type: Unique,
                 manual_name: None,
                 format: None,
@@ -488,12 +195,257 @@
                 field_formats: [],
                 height_scaling_factor: None,
             )),
-            (26): Divider((
+            (13): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "tx_async_gearbox",
+                        ],
+                        id: Wellen((2)),
+                    ),
+                    name: "wr_ptr_g_sync2",
+                    id: Wellen((34)),
+                ),
+                color: None,
+                background_color: None,
+                display_name: "wr_ptr_g_sync2 [1:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: Some("Binary"),
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (5): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "tx_async_gearbox",
+                        ],
+                        id: Wellen((2)),
+                    ),
+                    name: "clk_out",
+                    id: Wellen((11)),
+                ),
+                color: None,
+                background_color: None,
+                display_name: "clk_out",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (8): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "tx_async_gearbox",
+                        ],
+                        id: Wellen((2)),
+                    ),
+                    name: "valid_in",
+                    id: Wellen((14)),
+                ),
+                color: None,
+                background_color: None,
+                display_name: "valid_in",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (11): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "tx_async_gearbox",
+                        ],
+                        id: Wellen((2)),
+                    ),
+                    name: "wr_ptr_g",
+                    id: Wellen((29)),
+                ),
+                color: None,
+                background_color: None,
+                display_name: "wr_ptr_g [1:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: Some("Binary (with groups)"),
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (4): Divider((
                 color: None,
                 background_color: None,
                 name: None,
             )),
-            (45): Variable((
+            (9): Divider((
+                color: None,
+                background_color: None,
+                name: None,
+            )),
+            (10): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "tx_async_gearbox",
+                        ],
+                        id: Wellen((2)),
+                    ),
+                    name: "wr_en",
+                    id: Wellen((22)),
+                ),
+                color: None,
+                background_color: None,
+                display_name: "wr_en",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (17): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "tx_async_gearbox",
+                        ],
+                        id: Wellen((2)),
+                    ),
+                    name: "rd_b_ptr",
+                    id: Wellen((30)),
+                ),
+                color: None,
+                background_color: None,
+                display_name: "rd_b_ptr [8:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: Some("Unsigned"),
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (18): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "tx_async_gearbox",
+                        ],
+                        id: Wellen((2)),
+                    ),
+                    name: "data_in",
+                    id: Wellen((13)),
+                ),
+                color: None,
+                background_color: None,
+                display_name: "data_in [65:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (6): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "tx_async_gearbox",
+                        ],
+                        id: Wellen((2)),
+                    ),
+                    name: "clk_out_reset",
+                    id: Wellen((12)),
+                ),
+                color: None,
+                background_color: None,
+                display_name: "clk_out_reset",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (12): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "tx_async_gearbox",
+                        ],
+                        id: Wellen((2)),
+                    ),
+                    name: "wr_ptr_g_sync1",
+                    id: Wellen((33)),
+                ),
+                color: None,
+                background_color: None,
+                display_name: "wr_ptr_g_sync1 [1:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: Some("Binary"),
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (2): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "tx_async_gearbox",
+                        ],
+                        id: Wellen((2)),
+                    ),
+                    name: "clk_in_reset",
+                    id: Wellen((10)),
+                ),
+                color: None,
+                background_color: None,
+                display_name: "clk_in_reset",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (14): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "tx_async_gearbox",
+                        ],
+                        id: Wellen((2)),
+                    ),
+                    name: "wr_ptr_sync",
+                    id: Wellen((35)),
+                ),
+                color: None,
+                background_color: None,
+                display_name: "wr_ptr_sync [1:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (15): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "tx_async_gearbox",
+                        ],
+                        id: Wellen((2)),
+                    ),
+                    name: "rd_ptr",
+                    id: Wellen((36)),
+                ),
+                color: None,
+                background_color: None,
+                display_name: "rd_ptr [1:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (16): Variable((
                 variable_ref: (
                     path: (
                         strs: [
@@ -502,7 +454,7 @@
                         id: Wellen((2)),
                     ),
                     name: "empty",
-                    id: Wellen((52)),
+                    id: Wellen((21)),
                 ),
                 color: None,
                 background_color: None,
@@ -513,7 +465,17 @@
                 field_formats: [],
                 height_scaling_factor: None,
             )),
-            (49): Variable((
+            (7): Divider((
+                color: None,
+                background_color: None,
+                name: None,
+            )),
+            (3): Divider((
+                color: None,
+                background_color: None,
+                name: None,
+            )),
+            (19): Variable((
                 variable_ref: (
                     path: (
                         strs: [
@@ -521,12 +483,12 @@
                         ],
                         id: Wellen((2)),
                     ),
-                    name: "wr_ptr_est",
-                    id: Wellen((57)),
+                    name: "data_out",
+                    id: Wellen((15)),
                 ),
                 color: None,
                 background_color: None,
-                display_name: "wr_ptr_est [3:0]",
+                display_name: "data_out [31:0]",
                 display_name_type: Unique,
                 manual_name: None,
                 format: None,
@@ -534,11 +496,11 @@
                 height_scaling_factor: None,
             )),
         },
-        display_item_ref_counter: 67,
+        display_item_ref_counter: 20,
         viewports: [
             (
-                curr_left: (0.26498243198031096),
-                curr_right: (0.9817383459665607),
+                curr_left: (0.0001659974922561425),
+                curr_right: (0.0005757329844477384),
                 target_left: (0.0),
                 target_right: (1.0),
                 move_start_left: (0.0),
@@ -548,10 +510,10 @@
             ),
         ],
         cursor: Some((1, [
-            1088,
+            1504,
         ])),
         markers: {},
-        focused_item: Some((5)),
+        focused_item: Some((19)),
         focused_transaction: (None, None),
         default_variable_name_type: Unique,
         scroll_offset: 0.0,
@@ -560,10 +522,7 @@
     )),
     drag_started: false,
     drag_source_idx: None,
-    drag_target_idx: Some((
-        before: (5),
-        level: 0,
-    )),
+    drag_target_idx: None,
     previous_waves: None,
     count: None,
     blacklisted_translators: [],

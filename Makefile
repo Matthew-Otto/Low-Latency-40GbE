@@ -17,6 +17,7 @@ PROG   = quartus_pgm
 # build files
 SOF = $(PROJECT).sof
 CDF = $(PROJECT).cdf
+SRC_FILES := $(wildcard $(RTL_DIR)*.sv)
 
 
 
@@ -28,10 +29,10 @@ all: $(SOF)
 program: $(SOF)
 	$(PROG) $(CDF)
 
-timing: $(SOF)
+timing: #$(SOF)
 	$(TIMING) $(PROJECT) -c $(PROJECT)
 
-$(SOF): $(RTL_DIR)/*.sv
+$(SOF): $(SRC_FILES)
 	$(SYNTH) --read_settings_files=on --write_settings_files=off $(PROJECT) -c $(PROJECT)
 	$(P&R) --read_settings_files=on --write_settings_files=off $(PROJECT) -c $(PROJECT_TITLE)
 	$(ASM) --read_settings_files=on --write_settings_files=off $(PROJECT) -c $(PROJECT)

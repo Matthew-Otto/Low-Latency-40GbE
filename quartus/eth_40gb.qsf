@@ -36,13 +36,19 @@ set_global_assignment -name SYSTEMVERILOG_FILE ../RTL/PCS/alignment_generator.sv
 set_global_assignment -name SYSTEMVERILOG_FILE ../RTL/PCS/tx_async_gearbox.sv
 set_global_assignment -name SYSTEMVERILOG_FILE ../RTL/PCS/block_sync.sv
 set_global_assignment -name SYSTEMVERILOG_FILE ../RTL/PCS/eth_40gb_pcs.sv
-set_global_assignment -name SDC_FILE top.sdc
 set_global_assignment -name SYSTEMVERILOG_FILE ../RTL/PCS/rx_async_gearbox.sv
 set_global_assignment -name SYSTEMVERILOG_FILE ../RTL/PCS/scrambler.sv
 set_global_assignment -name SYSTEMVERILOG_FILE ../RTL/PCS/descrambler.sv
 set_global_assignment -name SYSTEMVERILOG_FILE ../RTL/PCS/block_encoder.sv
 set_global_assignment -name SYSTEMVERILOG_FILE ../RTL/reset_sync.sv
 set_global_assignment -name SYSTEMVERILOG_FILE ../RTL/eth_40gb.sv
+set_global_assignment -name IP_FILE qsfp_atx_pll.ip
+set_global_assignment -name IP_FILE phy_reset.ip
+set_global_assignment -name IP_FILE reset_release.ip
+set_global_assignment -name IP_FILE core_pll.ip
+set_global_assignment -name SIGNALTAP_FILE stp1.stp
+set_global_assignment -name IP_FILE qsfp_phy_40gbe.ip
+set_global_assignment -name SDC_FILE top.sdc
 set_global_assignment -name POWER_APPLY_THERMAL_MARGIN ADDITIONAL
 
 set_global_assignment -name VID_OPERATION_MODE "PMBUS MASTER"
@@ -59,13 +65,8 @@ set_global_assignment -name PWRMGT_SLAVE_DEVICE7_ADDRESS 00
 set_global_assignment -name PWRMGT_VOLTAGE_OUTPUT_FORMAT "AUTO DISCOVERY"
 set_global_assignment -name PWRMGT_TRANSLATED_VOLTAGE_VALUE_UNIT VOLTS
 
-set_global_assignment -name IP_FILE qsfp_atx_pll.ip
-set_global_assignment -name IP_FILE phy_reset.ip
-set_global_assignment -name IP_FILE reset_release.ip
-set_global_assignment -name IP_FILE core_pll.ip
 set_global_assignment -name ENABLE_SIGNALTAP ON
 set_global_assignment -name USE_SIGNALTAP_FILE stp1.stp
-set_global_assignment -name SIGNALTAP_FILE stp1.stp
 set_global_assignment -name VERILOG_INPUT_VERSION SYSTEMVERILOG_2012
 set_global_assignment -name AUTO_RESTART_CONFIGURATION OFF
 set_global_assignment -name USE_PWRMGT_SCL SDM_IO14
@@ -171,5 +172,6 @@ set_instance_assignment -name IO_STANDARD "1.8 V" -to qsfp1_mod_prsn -entity eth
 set_instance_assignment -name IO_STANDARD "1.8 V" -to qsfp1_sda -entity eth_40gb
 set_instance_assignment -name IO_STANDARD "1.8 V" -to qsfp1_scl -entity eth_40gb
 
-set_global_assignment -name IP_FILE qsfp_phy_40gbe.ip
 set_global_assignment -name POWER_THERMAL_SOLVER_MODE FIND_MAX_TJ
+set_instance_assignment -name PARTITION_COLOUR 4294956973 -to eth_40gb -entity eth_40gb
+set_instance_assignment -name PARTITION_COLOUR 4294939841 -to auto_fab_0 -entity eth_40gb

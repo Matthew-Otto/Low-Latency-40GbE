@@ -2,8 +2,9 @@ dni/
 qdb/
 *.qws
 quartus/
-!*.qsf
 log.txt
+!*.qsf
+!*.sdc
 
 __pycache__
 sim_build

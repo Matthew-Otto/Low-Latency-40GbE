@@ -17,68 +17,73 @@ module tx_async_gearbox (
   output logic        valid_out
 );
 
-  localparam BUFFER_SIZE = 16;
+  localparam BUFFER_SIZE = 4;
   localparam PTR_SIZE = $clog2(BUFFER_SIZE);
-  localparam ADDR_SIZE = $clog2(BUFFER_SIZE<<7);
-
-  logic [31:0] buffer [BUFFER_SIZE-1:0];
-  logic [31:0] buffer_wr [BUFFER_SIZE-1:0];
+  localparam BIT_PTR_SIZE = $clog2(BUFFER_SIZE<<7);
+  localparam ROLL_OVER = BUFFER_SIZE * 66;
 
   logic empty;
   logic wr_en;
-  
-  logic [ADDR_SIZE-1:0] wr_addr, next_wr_addr, raw_next_wr_addr;
-  logic [PTR_SIZE-1:0] wr_ptr_est;
+
+  (* ramstyle = "logic" *) logic [65:0] buffer [BUFFER_SIZE-1:0];
+
+  // input clk domain
+  logic [PTR_SIZE-1:0] wr_ptr, next_wr_ptr;
   logic [PTR_SIZE-1:0] wr_ptr_g;
+  // output clk domain
+  logic [BIT_PTR_SIZE-1:0] rd_b_ptr, next_rd_b_ptr, raw_next_rd_b_ptr;
   logic [PTR_SIZE-1:0] wr_ptr_g_sync1, wr_ptr_g_sync2;
-  
   logic [PTR_SIZE-1:0] wr_ptr_sync;
   logic [PTR_SIZE-1:0] rd_ptr, next_rd_ptr;
+  logic [6:0] row_sel, next_row_sel;
+  logic [131:0] read_row;
 
 
-  //// write (clk_in) domain
-  assign raw_next_wr_addr = wr_addr + 66;
-  assign next_wr_addr = (raw_next_wr_addr > (BUFFER_SIZE*32)) ? (raw_next_wr_addr - (BUFFER_SIZE*32)) : raw_next_wr_addr;
-  assign wr_ptr_est = next_wr_addr >> 5;
+  ///////////////////////////////////////
+  ////// write (clk_in) domain //////////
+  ///////////////////////////////////////
   
   assign wr_en = valid_in && ~clk_in_reset;
 
-
+  assign next_wr_ptr = wr_ptr + 1;
+  
   always_ff @(posedge clk_in or posedge clk_in_reset) begin
     if (clk_in_reset) begin
-      wr_addr <= 0;
+      wr_ptr <= 0;
       wr_ptr_g <= 0;
     end else if (valid_in) begin
-      wr_addr <= next_wr_addr;
-      wr_ptr_g <= wr_ptr_est ^ (wr_ptr_est >> 1);
+      wr_ptr <= next_wr_ptr;
+      wr_ptr_g <= next_wr_ptr ^ (next_wr_ptr >> 1);
     end
   end
-
-  always_comb begin
-    for (int i = 0; i < BUFFER_SIZE; i++)
-      buffer_wr[i] = buffer[i];
-
-    for (int i = 0; i < 66; i++)
-      buffer_wr[(wr_addr+i)/32][(wr_addr+i)%32] = data_in[i];
-  end
-
+  
   always_ff @(posedge clk_in) begin
     if (wr_en)
-      for (int i = 0; i < BUFFER_SIZE; i++)
-        buffer[i] <= buffer_wr[i];
+    buffer[wr_ptr] <= data_in;
   end
+  
+  
+  ///////////////////////////////////////
+  ////// read (clk_out) domain //////////
+  ///////////////////////////////////////
 
+  assign empty = (rd_ptr == wr_ptr_sync);
 
+  assign raw_next_rd_b_ptr = rd_b_ptr + 32;
+  assign next_rd_b_ptr = (raw_next_rd_b_ptr >= ROLL_OVER) ? (raw_next_rd_b_ptr - ROLL_OVER) : raw_next_rd_b_ptr;
 
-  //// read (clk_out) domain
-  assign next_rd_ptr = rd_ptr + 1;
-  assign empty = rd_ptr == wr_ptr_sync;
+  assign next_rd_ptr = next_rd_b_ptr / 66;
+  assign next_row_sel = next_rd_b_ptr % 66;
 
   always_ff @(posedge clk_out or posedge clk_out_reset) begin
     if (clk_out_reset) begin
+      rd_b_ptr <= 0;
       rd_ptr <= 0;
+      row_sel <= 0;
     end else if (~empty) begin
+      rd_b_ptr <= next_rd_b_ptr;
       rd_ptr <= next_rd_ptr;
+      row_sel <= next_row_sel;
     end
   end
 
@@ -87,13 +92,20 @@ module tx_async_gearbox (
     if (clk_out_reset) {wr_ptr_g_sync2, wr_ptr_g_sync1} <= 0;
     else               {wr_ptr_g_sync2, wr_ptr_g_sync1} <= {wr_ptr_g_sync1, wr_ptr_g};
   end
+  // convert gray code back to binary
   always_comb begin
     for (int i = 0; i < PTR_SIZE; i++)
       wr_ptr_sync[i] = ^(wr_ptr_g_sync2 >> i);
   end
 
+  // select 32 bits from 66 bit rows
+  always_comb begin
+    read_row = {buffer[rd_ptr+1],buffer[rd_ptr]};
+    //data_out = read_row[row_sel+:32];
+  end
+
   always_ff @(posedge clk_out) begin
-    data_out <= buffer[rd_ptr];
+    data_out <= read_row[row_sel+:32];
     valid_out <= ~empty;
   end
 
