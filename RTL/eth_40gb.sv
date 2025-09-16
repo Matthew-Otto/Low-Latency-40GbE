@@ -23,7 +23,7 @@ module eth_40gb (
 );
 
   // clocks
-  logic core_clk;
+  logic core_clk; // 156.25 MHz
   logic serial_clk;
   logic rx_clk;
   logic core_pll_locked;
@@ -50,14 +50,17 @@ module eth_40gb (
   logic [3:0] rx_analogreset_stat;
   logic [3:0] rx_digitalreset_stat;
   logic [3:0] rx_data_val;
-  logic       rx_blk_lock;
+  logic [3:0] rx_blk_lock;
 
   // PHY
   logic [3:0] tx_phy_clk;
   logic [3:0] rx_phy_clk;
   logic [3:0] loopback_en;
-  logic [127:0] tx_parallel_data;
-  logic [127:0] rx_parallel_data;
+  logic [255:0] tx_parallel_data;
+  logic [255:0] rx_parallel_data;
+
+  logic [7:0] tx_control;
+  logic [7:0] rx_control;
 
 
   //// Core PLL
@@ -98,7 +101,7 @@ module eth_40gb (
 
   assign user_led_g[0] = ~core_pll_locked;
   assign user_led_g[1] = ~tx_pll_locked;
-  assign user_led_g[2] = ~|rx_ready;
+  assign user_led_g[2] = ~&tx_ready;
   assign user_led_g[3] = ~|rx_is_lockedtodata;
 
   //// QSFP reset
@@ -142,15 +145,23 @@ module eth_40gb (
     .rx_seriallpbken         (loopback_en),         //   input,    width = 4,         rx_seriallpbken.rx_seriallpbken
     .rx_is_lockedtoref       (),       //  output,    width = 4,       rx_is_lockedtoref.rx_is_lockedtoref
     .rx_is_lockedtodata      (rx_is_lockedtodata),      //  output,    width = 4,      rx_is_lockedtodata.rx_is_lockedtodata
-    .tx_coreclkin            (),            //   input,    width = 4,            tx_coreclkin.clk
+    .tx_coreclkin            ({4{core_clk}}),            //   input,    width = 4,            tx_coreclkin.clk
     .rx_coreclkin            ({4{core_clk}}),            //   input,    width = 4,            rx_coreclkin.clk
     .tx_clkout               (tx_phy_clk),               //  output,    width = 4,               tx_clkout.clk
+    .tx_clkout2              (),              //  output,    width = 4,              tx_clkout2.clk
     .rx_clkout               (rx_phy_clk),               //  output,    width = 4,               rx_clkout.clk
+    .rx_clkout2              (),              //  output,    width = 4,              rx_clkout2.clk
     .tx_parallel_data        (tx_parallel_data),        //   input,  width = 128,        tx_parallel_data.tx_parallel_data
+    .tx_control              (tx_control),
+    .tx_enh_data_valid       (4'hF),       //   input,    width = 4,       tx_enh_data_valid.tx_enh_data_valid
     .rx_parallel_data        (rx_parallel_data),        //  output,  width = 128,        rx_parallel_data.rx_parallel_data
+    .rx_control              (rx_control),
+    .rx_enh_blk_lock         (rx_blk_lock),          //  output,    width = 4,         rx_enh_blk_lock.rx_enh_blk_lock
+    .rx_enh_data_valid       (),       //  output,    width = 4,       rx_enh_data_valid.rx_enh_data_valid
     .unused_tx_parallel_data (), //   input,  width = 192, unused_tx_parallel_data.unused_tx_parallel_data
     .unused_rx_parallel_data ()  //  output,  width = 188, unused_rx_parallel_data.unused_rx_parallel_data
   );
+
 
   // QSFP sideband
   assign qsfp1_lp_mode        = 0;
@@ -158,6 +169,17 @@ module eth_40gb (
   assign qsfp1_rstn           = ~reset_master;
   assign qsfp1_scl            = 1'bz;
   assign qsfp1_sda            = 1'bz;
+
+  logic [263:0] rx_dat_wide;
+  logic [263:0] tx_dat_wide;
+
+  always_comb begin
+    for (int i = 0; i < 4; i++) begin
+      rx_dat_wide[i*66+:66] = {rx_parallel_data[i*64+:64], rx_control[i*2+:2]};
+      tx_parallel_data[i*64+:64] = tx_dat_wide[(i*66+2)+:64];
+      tx_control[i*2+:2] = tx_dat_wide[i*66+:2];
+    end
+  end
 
 
   eth_40gb_pcs eth_40gb_pcs_i (
@@ -167,22 +189,9 @@ module eth_40gb (
     .tx_data_valid(),
     .tx_data(),
     .rx_phy_clk(rx_phy_clk),
-    .rx_parallel_data(rx_parallel_data),
+    .rx_parallel_data(rx_dat_wide),
     .tx_phy_clk(tx_phy_clk),
-    .tx_parallel_data(tx_parallel_data)
+    .tx_parallel_data(tx_dat_wide)
   );
-
-  logic [29:0] ledcnt;
-  always_ff @(posedge rx_phy_clk[0]) begin
-    ledcnt <= ledcnt + 1;
-  end
-  assign user_led_r[2] = ledcnt[29];
-  
-  
-  logic [29:0] cledcnt;
-  always_ff @(posedge core_clk) begin
-    cledcnt <= cledcnt + 1;
-  end
-  assign user_led_r[1] = cledcnt[29];
 
 endmodule : eth_40gb

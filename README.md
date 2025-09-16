@@ -23,7 +23,15 @@ PMA -> Deserializer -/32-> PCS/CORE FIFO -/32-> Gearbox/Block Alignment -/66-> D
 ## Testing Latency
 
 ### On-Chip Loopback
-TODO
+
+A simple way to isolate the latency of the hard-tile and core logic to enable loopback in the PCS and measure the amount of time it takes to send a receive a test packet. It isn't clear how long this loopback path is, but it should be considerably shorter than any real-world link.
+
+### Results
+With loopback enabled and block alignment performed inside the H-tile, it takes a minimum of 24 cycles @ 156.25 MHz or 160ns for an alignment marker to be sent and received through the PCS loopback. This is a very unimpressive value, but there are a few angles to explore that could reduce it:
+
+* Implement block alignment in core logic.
+* Double the clock rate of the core logic and halve the pipeline width.
+* Use custom asynchronous gearboxes / do not rely on H-Tile CDC FIFOs
 
 ### Real World Latency
 

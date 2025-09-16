@@ -9,10 +9,10 @@ module eth_40gb_pcs (
 
   // Serial interface
   input  logic [3:0]   rx_phy_clk,
-  input  logic [127:0] rx_parallel_data,
+  input  logic [263:0] rx_parallel_data,
   
   input  logic [3:0]   tx_phy_clk,
-  output logic [127:0] tx_parallel_data
+  output logic [263:0] tx_parallel_data
 );
   
   genvar i, j;
@@ -45,7 +45,7 @@ module eth_40gb_pcs (
 
   generate
     for (i = 0; i < 4; i++) begin
-      rx_async_gearbox rx_async_gearbox_i (
+      /* rx_async_gearbox rx_async_gearbox_i (
         .clk_in(rx_phy_clk[i]),
         .clk_in_reset(),
         .clk_out(core_clk),
@@ -55,15 +55,17 @@ module eth_40gb_pcs (
         .bitslip(bitslip[i]),
         .data_out(rx_scrambled[i]),
         .valid_out()
-      );
+      ); */
 
-      block_sync block_sync_i (
+      assign rx_scrambled[i] = rx_parallel_data[i*66+:66];
+
+      /* block_sync block_sync_i (
         .clk(core_clk),
         .reset(core_reset),
         .sync_bits(rx_scrambled[i][1:0]),
-        .bitslip(bitslip[i]),
+        .bitslip(rx_bitslip[i]),
         .block_locked(block_locked[i])
-      );
+      ); */
 
       alignment_extractor #(
         .LANE_NUMBER(i)
@@ -147,7 +149,10 @@ module eth_40gb_pcs (
 
       assign tx_lane[i] = jam_alignment_marker ? tx_alignment_marker[i] : tx_scrambled_block[i];
 
-      tx_async_gearbox tx_async_gearbox_i (
+
+      assign tx_parallel_data[i*66+:66] = tx_lane[i];
+
+      /* tx_async_gearbox tx_async_gearbox_i (
         .clk_in(core_clk),
         .clk_in_reset(core_reset),
         .clk_out(tx_phy_clk[i]),
@@ -156,9 +161,10 @@ module eth_40gb_pcs (
         .valid_in(1),
         .data_out(tx_parallel_data[i*32+:32]),
         .valid_out()
-      );
+      ); */
 
     end
   endgenerate
+
 
 endmodule : eth_40gb_pcs
