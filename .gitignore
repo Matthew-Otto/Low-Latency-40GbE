@@ -1,10 +1,11 @@
 dni/
 qdb/
 *.qws
-quartus/
 log.txt
+quartus/
 !*.qsf
 !*.sdc
+!*.ip
 
 __pycache__
 sim_build
